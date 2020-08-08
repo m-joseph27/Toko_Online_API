@@ -51,7 +51,6 @@ module.exports = {
     const data = req.body;
     const result = {};
     categoryModel.updateProduct(idProduct, data).then((results) => {
-      console.log(data)
       if(data === 0 ) {
         result.status = 404;
         result.message = 'failed to input update';
@@ -82,7 +81,6 @@ module.exports = {
         result.status = 200;
         result.message = 'OK';
         result.data = results;
-        console.log(results)
         helper.response(res, result);
       }
     })
@@ -90,7 +88,7 @@ module.exports = {
       result.message = 'internal server error';
       result.err = err;
       helper.response(res, result)
-    });
+    })
   }
 
 }

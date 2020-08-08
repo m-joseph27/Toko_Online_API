@@ -4,8 +4,8 @@ const categoryDetail = require('../controller/product');
 
 Router
   .get('/', categoryDetail.getProduct)
+  .get('/:id_product', categoryDetail.detailProduct)
   .post('/insert', categoryDetail.insertProduct)
   .patch('/:id_product', categoryDetail.updateProduct)
-  .get('/:id_product', categoryDetail.detailProduct)
 
   module.exports = Router;
