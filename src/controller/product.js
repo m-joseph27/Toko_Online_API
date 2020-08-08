@@ -8,13 +8,12 @@ module.exports = {
     categoryModel.getProduct().then((results) => {
       if(results.length === 0 ) {
         result.status = 404;
-        result.message = 'no data on database';
+        result.message = 'product not found';
         helper.response(res, result);
       } else {
         result.status = 200;
         result.message = 'OK';
         result.data = results;
-        console.log(results)
         helper.response(res, result);
       }
     })
