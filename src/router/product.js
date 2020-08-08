@@ -6,6 +6,7 @@ const cors = require('cors');
 Router
   .get('/', categoryDetail.getProduct)
   .post('/insert', categoryDetail.insertProduct)
-  .patch('/id_product', categoryDetail.updateProduct)
+  .patch('/:id_product', categoryDetail.updateProduct)
+  .get('/:id_product', categoryDetail.detailProduct)
 
   module.exports = Router;

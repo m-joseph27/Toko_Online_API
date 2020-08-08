@@ -17,10 +17,9 @@ module.exports = {
     })
   },
   
-  categoryDetail: () => {
+  categoryDetail: (id_product) => {
     return new Promise((resolve, reject) => {
-      if(sort) {
-        connection.query("SELECT * FROM product", (err, result) => {
+        connection.query("SELECT * FROM product WHERE id_product= ?", [id_product], (err, result) => {
           if(!err) {
             resolve(result)
           } else {
@@ -28,7 +27,7 @@ module.exports = {
           }
         })
       }
-    })
+    )
   },
 
   insertProduct: (nm_product) => {
@@ -43,9 +42,9 @@ module.exports = {
     })
   },
 
-  updateProduct: (id_product) => {
+  updateProduct: (id_product, data) => {
     return new Promise((resolve, reject) => {
-      connection.query("UPDATE product SET ? WHERE nm_product= ?", [id_product], (err, result) => {
+      connection.query("UPDATE product SET ? WHERE id_product= ?", [data, id_product], (err, result) => {
         if(!err) {
           resolve(result)
         } else {
