@@ -1,6 +1,5 @@
 const categoryModel = require('../models/user');
 const helper = require('../helper/helpers');
-const { response } = require('../helper/helpers');
 
 module.exports = {
   getUser: (req, res) => {

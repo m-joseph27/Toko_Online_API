@@ -1,16 +1,16 @@
-const categoryModel = require('../models/product');
+const categoryModel = require('../models/order');
 const helper = require('../helper/helpers');
 
 module.exports = {
-  getProduct: (req, res) => {
-    const result = {}
-    categoryModel.getProduct().then((results) => {
-      if(results.length === 0 ) {
+  getOrder: (req, res) => {
+    const result = {};
+    categoryModel.getOrder().then((results) => {
+      if(results.length === 0) {
         result.status = 404;
         result.message = 'product not found';
         helper.response(res, result);
       } else {
-        result.status = 200;
+        result.status = 202;
         result.message = 'OK';
         result.data = results;
         helper.response(res, result);
@@ -19,14 +19,14 @@ module.exports = {
     .catch(err => {
       result.message = 'internal server error';
       result.err = err;
-      helper.response(res, result)
-    });
+      helper.response(res,result)
+    })
   },
 
-  insertProduct: (req, res) => {
+  insertOrder: (req, res) => {
     const data = req.body;
     const result = {};
-    categoryModel.insertProduct(data).then((results) => {
+    categoryModel.insertOrder(data).then((results) => {
       if(data === undefined ) {
         result.status = 404;
         result.message = 'failed to input product';
@@ -45,11 +45,33 @@ module.exports = {
     });
   },
 
-  updateProduct: (req, res) => {
-    const idProduct = req.params.id_product;
+  detailOrder: (req, res) => {
+    const idOrder = req.params.id_order;
+    const result = {}
+    categoryModel.orderDetail(idOrder).then((results) => {
+      if(results.length === 0 ) {
+        result.status = 404;
+        result.message = 'Order not found';
+        helper.response(res, result);
+      } else {
+        result.status = 200;
+        result.message = 'OK';
+        result.data = results;
+        helper.response(res, result);
+      }
+    })
+    .catch(err => {
+      result.message = 'internal server error';
+      result.err = err;
+      helper.response(res, result)
+    })
+  },
+
+  updateOrder: (req, res) => {
+    const idOrder = req.params.id_order;
     const data = req.body;
     const result = {};
-    categoryModel.updateProduct(idProduct, data).then((results) => {
+    categoryModel.updateOrder(idOrder, data).then((result) => {
       if(data === 0 ) {
         result.status = 404;
         result.message = 'failed to input update';
@@ -67,27 +89,5 @@ module.exports = {
       helper.response(res, result)
     });
   },
-
-  detailProduct: (req, res) => {
-    const idProduct = req.params.id_product;
-    const result = {}
-    categoryModel.categoryDetail(idProduct).then((results) => {
-      if(results.length === 0 ) {
-        result.status = 404;
-        result.message = 'Product not found';
-        helper.response(res, result);
-      } else {
-        result.status = 200;
-        result.message = 'OK';
-        result.data = results;
-        helper.response(res, result);
-      }
-    })
-    .catch(err => {
-      result.message = 'internal server error';
-      result.err = err;
-      helper.response(res, result)
-    })
-  }
 
 }
