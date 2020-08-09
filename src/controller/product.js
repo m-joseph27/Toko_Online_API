@@ -26,6 +26,7 @@ module.exports = {
   insertProduct: (req, res) => {
     const data = req.body;
     const result = {};
+    data.photo = `http://localhost:1111/api/upload/${req.file.filename}`
     categoryModel.insertProduct(data).then((results) => {
       if(data === undefined ) {
         result.status = 404;
@@ -39,6 +40,7 @@ module.exports = {
       }
     })
     .catch(err => {
+      console.log(err)
       result.message = 'internal server error';
       result.err = err;
       helper.response(res, result)

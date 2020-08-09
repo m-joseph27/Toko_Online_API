@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api', route);
+app.use('/api/upload',express.static('./upload'))
 app.listen(port, () => {
   console.log(`App Listen on ${port}`);
 })
