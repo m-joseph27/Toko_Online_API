@@ -69,7 +69,7 @@ module.exports = {
     categoryModel.userDetail(idUser).then((result) => {
       if(result.length === 0) {
         result.status = 404;
-        result.message = 'no user found';
+        result.message = 'User not found';
         helper.response(res, result);
       } else {
         result.status = 200;
