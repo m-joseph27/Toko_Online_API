@@ -48,8 +48,8 @@ module.exports = {
   detailOrder: (req, res) => {
     const idOrder = req.params.id_order;
     const result = {}
-    categoryModel.orderDetail(idOrder).then((results) => {
-      if(results.length === 0 ) {
+    categoryModel.orderDetail(idOrder).then((result) => {
+      if(result.length === 0 ) {
         result.status = 404;
         result.message = 'Order not found';
         helper.response(res, result);
@@ -61,6 +61,7 @@ module.exports = {
       }
     })
     .catch(err => {
+      console.log(err)
       result.message = 'internal server error';
       result.err = err;
       helper.response(res, result)

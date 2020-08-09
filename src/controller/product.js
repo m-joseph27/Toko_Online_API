@@ -51,6 +51,7 @@ module.exports = {
     const idProduct = req.params.id_product;
     const data = req.body;
     const result = {};
+    data.photo = `http://localhost:1111/api/upload/${req.file.filename}`
     categoryModel.updateProduct(idProduct, data).then((results) => {
       if(data === 0 ) {
         result.status = 404;
@@ -73,7 +74,7 @@ module.exports = {
   detailProduct: (req, res) => {
     const idProduct = req.params.id_product;
     const result = {}
-    categoryModel.categoryDetail(idProduct).then((results) => {
+    categoryModel.productDetail(idProduct).then((results) => {
       if(results.length === 0 ) {
         result.status = 404;
         result.message = 'Product not found';

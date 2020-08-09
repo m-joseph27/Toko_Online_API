@@ -41,7 +41,7 @@ module.exports = {
     })
   },
 
-  categoryDetail: (id_product) => {
+  productDetail: (id_product) => {
     return new Promise((resolve, reject) => {
         connection.query("SELECT * FROM product WHERE id_product= ?", [id_product], (err, result) => {
           if(!err) {
