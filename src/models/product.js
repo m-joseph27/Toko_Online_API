@@ -54,4 +54,17 @@ module.exports = {
     )
   },
   
+  getPage: (page)=> {
+    const dataPage = 6;
+    const firstData = dataPage * page - dataPage;
+    return new Promise((resolve,reject)=> {
+      connection.query("SELECT * FROM `product` ORDER BY id_product ASC LIMIT ?, ?",[firstData, dataPage], (err,result)=> {
+        if(!err){
+          resolve(result)
+        } else {
+          reject(new Error(err))
+        }
+      })
+    })
+  },
 }

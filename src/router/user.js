@@ -1,7 +1,8 @@
 const express = require('express');
 const Router = express.Router();
-const categoryUser = require('../controller/user');
+const controlerUser = require('../controller/user');
 const multer = require('multer');
+const auth = require('../helper/auth');
 const storage = multer.diskStorage({
   destination: function(req,file,cb){
     cb(null, './upload')
@@ -15,9 +16,11 @@ const upload = multer({
 })
 
 Router
-  .get('/', categoryUser.getUser)
-  .get('/:id_user', categoryUser.detailUser)
-  .post('/insert', upload.single('photo'), categoryUser.insertUser)
-  .patch('/:id_user', upload.single('photo'), categoryUser.updateUser)
+  .get('/', controlerUser.getUser)
+  .get('/:id_user', controlerUser.detailUser)
+  .post('/insert', upload.single('photo'), controlerUser.insertUser)
+  .post('/login', controlerUser.login)
+  .post('/register', controlerUser.register)
+  .patch('/:id_user', upload.single('photo'), controlerUser.updateUser)
 
 module.exports = Router;

@@ -1,9 +1,13 @@
 const categoryModel = require('../models/product');
 const helper = require('../helper/helpers');
+const { connect } = require('../config/db');
+const connection = require('../config/db');
 
 module.exports = {
   getProduct: (req, res) => {
+    const page = req.query.page;
     const result = {}
+    if(!page) {
     categoryModel.getProduct().then((results) => {
       if(results.length === 0 ) {
         result.status = 404;
@@ -14,13 +18,37 @@ module.exports = {
         result.message = 'OK';
         result.data = results;
         helper.response(res, result);
-      }
-    })
-    .catch(err => {
-      result.message = 'internal server error';
-      result.err = err;
-      helper.response(res, result)
-    });
+          }
+      })
+    } else {
+      connection.query("SELECT COUNT (*) as total FROM `product`", (err, result) => {
+        const total = result[0].total;
+        if(page >0) {
+          const dataPage = 6;
+          const totalPage = total / dataPage;
+          const allPage = Math.ceil(totalPage);
+          categoryModel.getPage(page)
+          .then((result) => {
+            if(page <= allPage){
+              result.status = 200;
+              result.message = 'OK';
+              result.data = result;
+              helper.response(res, result);
+            } else {
+              result.status = 404;
+              result.message = 'page not found';
+              helper.response(res, result);
+            }
+          })
+          .catch(err => {
+            result.status = 500;
+            result.message = 'Internal server error';
+            result.err = err;
+            helper.response(res, result);
+          })
+        }
+      })
+    }
   },
 
   insertProduct: (req, res) => {
@@ -40,7 +68,6 @@ module.exports = {
       }
     })
     .catch(err => {
-      console.log(err)
       result.message = 'internal server error';
       result.err = err;
       helper.response(res, result)
