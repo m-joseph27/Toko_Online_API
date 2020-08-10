@@ -57,6 +57,7 @@ module.exports = {
     data.photo = `http://localhost:1111/api/upload/${req.file.filename}`
     categoryModel.insertProduct(data).then((results) => {
       if(data === undefined ) {
+        console.log(data)
         result.status = 404;
         result.message = 'failed to input product';
         helper.response(res, result);
