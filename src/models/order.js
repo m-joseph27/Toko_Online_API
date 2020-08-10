@@ -4,7 +4,7 @@ const connection = require('../config/db');
 module.exports = {
   getOrder: () => {
     return new Promise((resolve, reject) => {
-      connection.query("SELECT * FROM order_product", (err, result) => {
+      connection.query("SELECT order_product.*, product.nm_product,product.price,product.description, user.nm_user FROM order_product INNER JOIN product ON order_product.id_product = product.id_product INNER JOIN user ON order_product.id_user = user.id_user",(err, result) => {
         if(!err) {
           resolve(result)
         } else {

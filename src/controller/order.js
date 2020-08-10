@@ -17,6 +17,7 @@ module.exports = {
       }
     })
     .catch(err => {
+      console.log(err)
       result.message = 'internal server error';
       result.err = err;
       helper.response(res,result)
@@ -56,7 +57,7 @@ module.exports = {
       } else {
         result.status = 200;
         result.message = 'OK';
-        result.data = results;
+        result.data = result;
         helper.response(res, result);
       }
     })
