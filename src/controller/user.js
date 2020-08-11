@@ -116,7 +116,7 @@ module.exports = {
         if(result[0] === undefined ) {
           console.log(result)
           result.status = 404;
-          result.message = 'Email not found';
+          result.message = 'Incorrect passorword';
           helper.response(res, result)
         } else {
           if (data.password === result[0].password){
