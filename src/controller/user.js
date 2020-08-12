@@ -122,7 +122,7 @@ module.exports = {
           if (data.password === result[0].password){
             result.status = 200;
             result.message = 'Login succes';
-            result.data = data;
+            result.data = result;
             helper.response(res, result)
           } else {
             result.status = 401;
