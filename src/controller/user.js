@@ -26,7 +26,7 @@ module.exports = {
   insertUser: (req, res) => {
     const data = req.body;
     const result = {};
-    data.photo = `http://localhost:1111/api/upload/${req.file.filename}`
+    data.photo = `http://54.173.129.116:1111//api/upload/${req.file.filename}`
     userControler.insertUser(data).then((result) => {
       if(data === undefined) {
         result.status = 404;
@@ -45,7 +45,7 @@ module.exports = {
     const idUser = req.params.id_user;
     const data = req.body;
     const result = {};
-    data.photo = `http://localhost:1111/api/upload/${req.file.filename}`
+    data.photo = `http://54.173.129.116:1111//api/upload/${req.file.filename}`
     userControler.updateUser(idUser, data).then((result) => {
       if(data === 0) {
         result.status = 404;
