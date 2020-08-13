@@ -54,7 +54,7 @@ module.exports = {
   insertProduct: (req, res) => {
     const data = req.body;
     const result = {};
-    data.photo = `http://54.173.129.116:1111//api/upload/${req.file.filename}`
+    data.photo = `http://54.208.198.155:2727//api/upload/${req.file.filename}`
     categoryModel.insertProduct(data).then((results) => {
       if(data === undefined ) {
         console.log(data)
@@ -79,7 +79,7 @@ module.exports = {
     const idProduct = req.params.id_product;
     const data = req.body;
     const result = {};
-    data.photo = `http://54.173.129.116:1111//api/upload/${req.file.filename}`
+    data.photo = `http://54.208.198.155:2727//api/upload/${req.file.filename}`
     categoryModel.updateProduct(idProduct, data).then((results) => {
       if(data === 0 ) {
         result.status = 404;
